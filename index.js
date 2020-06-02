@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const { errors, Joi, celebrate } = require('celebrate');
 const auth = require('./middlewares/auth');
 const users = require('./routes/users');
+const articles = require('./routes/articles');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { login, createUser } = require('./controllers/users');
 const errorHandler = require('./middlewares/errorHandler');
@@ -40,6 +41,7 @@ app.post('/signin', celebrate({
 
 app.use(auth);
 app.use('/', users);
+app.use('/', articles);
 
 app.use(errorLogger);
 app.use(errors());
