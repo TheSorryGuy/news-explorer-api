@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
-const router = require('./routes/router');
+const router = require('./routes/index');
 
 const {
   PORT, DATABASE_URL, SERVER_PARAMS,
