@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config');
+const AuthError = require('../errors/authError');
 
 
 module.exports = (req, res, next) => {
@@ -9,8 +10,7 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token, SECRET);
   } catch (err) {
-    res.status(401).send({ message: 'Необходима авторизация' });
-    return;
+    next(new AuthError('Необходима авторизация'));
   }
 
   req.user = payload;

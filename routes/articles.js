@@ -15,9 +15,9 @@ articlesRouter.post('/articles', celebrate({
     image: Joi.string().required().pattern(URL_REGEX),
   }),
 }), postArticle);
-articlesRouter.delete('/articles/articleId', celebrate({
+articlesRouter.delete('/articles/:articleId', celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().alphanum().length(24),
+    articleId: Joi.string().alphanum().length(24),
   }),
 }), deleteArticle);
 
