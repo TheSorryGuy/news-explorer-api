@@ -9,7 +9,7 @@ version: 0.0.1
 author: Fedor Ganin 
 github: https://github.com/TheSorryGuy/news-explorer-api
 url: api.ganin-news-explorer.gq
-IP: 84.201.141.27
+IP: 84.201.141.88
 ```
 # Deploy
 If u want to use this code to deploy your own server:
