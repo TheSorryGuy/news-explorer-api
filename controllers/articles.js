@@ -22,7 +22,7 @@ module.exports.postArticle = (req, res, next) => {
 };
 
 module.exports.deleteArticle = (req, res, next) => {
-  article.findOne({ _id: req.params.articleId })
+  article.findOne({ _id: req.params.articleId }).select('+owner')
     .orFail(new NotFoundError('Нет статьи с таким id'))
     .then((articleExist) => {
       if (!articleExist.owner.equals(req.user._id)) {
