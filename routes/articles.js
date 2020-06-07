@@ -1,7 +1,15 @@
 const articlesRouter = require('express').Router();
+const mongoose = require('mongoose');
 const { celebrate, Joi } = require('celebrate');
 const { URL_REGEX } = require('../config');
 const { getArticles, postArticle, deleteArticle } = require('../controllers/articles');
+
+const idValidator = (value, helpers) => {
+  if (!mongoose.Types.ObjectId(value)) {
+    return helpers.error('any.invalid');
+  }
+  return value;
+};
 
 articlesRouter.get('/articles', getArticles);
 articlesRouter.post('/articles', celebrate({
@@ -17,7 +25,7 @@ articlesRouter.post('/articles', celebrate({
 }), postArticle);
 articlesRouter.delete('/articles/:articleId', celebrate({
   params: Joi.object().keys({
-    articleId: Joi.string().alphanum().length(24),
+    articleId: Joi.string().custom(idValidator, 'id validator'),
   }),
 }), deleteArticle);
 
