@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const user = require('../models/user');
 const { SECRET } = require('../config');
 const DuplicateError = require('../errors/duplicateError');
+const { duplicateEmail } = require('../errors/errorMessages');
+const { authSuccess } = require('../responseMessages');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -20,7 +22,7 @@ module.exports.createUser = (req, res, next) => {
       let error = err;
 
       if (err.code === 11000) {
-        error = new DuplicateError('email занят');
+        error = new DuplicateError(duplicateEmail);
       }
 
       next(error);
@@ -33,7 +35,7 @@ module.exports.login = (req, res, next) => {
   user.identifyUser(email, password)
     .then((identifiedUser) => {
       const token = jwt.sign({ _id: identifiedUser._id }, SECRET, { expiresIn: '7d' });
-      res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ message: 'Авторизация прошла успешно' });
+      res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ message: authSuccess });
     })
     .catch(next);
 };
