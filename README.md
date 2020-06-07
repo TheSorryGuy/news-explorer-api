@@ -5,7 +5,7 @@ Project includes frontend and backend parts
 This api is used to process requests from ```News Explorer```
 
 ```sh
-version: 0.0.1
+version: 0.0.2
 author: Fedor Ganin 
 github: https://github.com/TheSorryGuy/news-explorer-api
 url: api.ganin-news-explorer.gq

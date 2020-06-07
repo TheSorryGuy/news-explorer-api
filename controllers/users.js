@@ -20,7 +20,6 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch((err) => {
       let error = err;
-
       if (err.code === 11000) {
         error = new DuplicateError(duplicateEmail);
       }
